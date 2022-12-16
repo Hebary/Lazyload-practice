@@ -9,10 +9,6 @@ html,body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 
 .main-layout {
@@ -24,7 +20,7 @@ nav {
   background-color: #363a45;
   height: 100vh;
   margin-right: 15px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   text-align: center;
   width: 250px;
 }

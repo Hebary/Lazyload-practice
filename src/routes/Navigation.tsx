@@ -15,7 +15,7 @@ export const Navigation: React.FC = () => {
               {routes.map(({ to, name }) => {
                 return (
                   <li key={to}>
-                    <NavLink className={({isActive})=>isActive ? 'nav-active' : '' } to={to}>{name}</NavLink>
+                    <NavLink className={({isActive})=> isActive ? 'nav-active' : '' } to={to}>{name}</NavLink>
                   </li>
                 );
               })}

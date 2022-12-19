@@ -42,9 +42,21 @@ nav li a {
   font-size: 1.2rem;
   text-decoration: none;
 }
+ul li, ul li a {
+  list-style: none;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: rgb(27, 187, 235);
+  
+}
+
+ul li a:active {
+  color: rgb(40, 170, 210);
+  text-decoration: none;
+}
 
 .nav-active {
-  color: grey;
+  color: rgb(47, 134, 160);
   transition: all .3s ease-out;
 }
 

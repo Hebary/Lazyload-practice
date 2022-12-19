@@ -1,9 +1,8 @@
 import { Suspense } from "react";
-import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
-import logo from "../assets/react.svg";
-import { Spinner } from "../lazy/components";
-import { LazyOne, LazyThree, LazyTwo } from "../routes/routes";
+import { BrowserRouter, Routes, Route, Navigate, NavLink } from "react-router-dom";
 import { routes } from "./routes";
+import { Spinner } from "../lazy/components";
+import logo from "../assets/react.svg";
 
 export const Navigation: React.FC = () => {
   return (
@@ -16,7 +15,7 @@ export const Navigation: React.FC = () => {
               {routes.map(({ to, name }) => {
                 return (
                   <li key={to}>
-                    <Link to={to}>{name}</Link>
+                    <NavLink className={({isActive})=>isActive ? 'nav-active' : '' } to={to}>{name}</NavLink>
                   </li>
                 );
               })}
@@ -24,9 +23,11 @@ export const Navigation: React.FC = () => {
           </nav>
 
           <Routes>
-             <Route path={routes[0].path} element ={ <LazyOne/> }/>
-            <Route path={routes[1].path} element={ <LazyTwo /> } />
-            <Route path={routes[2].path} element={ <LazyThree/> }/>
+              {
+                routes.map(({ to, Component }) => (
+                    <Route key={to} path={to} element={<Component/>}/>
+                ))
+              }
             <Route path="/*" element={<Navigate to="lazy-1" replace />} />
           </Routes>
         </div>

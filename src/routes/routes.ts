@@ -6,7 +6,7 @@ interface Route {
     to: string
     name: string;
     path: string;
-    Component : React.LazyExoticComponent<JSXComponent> | JSXComponent;
+    Component : LazyExoticComponent<JSXComponent> | JSXComponent;
 }
 
 

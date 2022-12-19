@@ -1,8 +1,13 @@
+type Props = {};
 
-type Props = {}
-
-export const LazyPageOne : React.FC = (props: Props) => {
+export const LazyPageOne = () => {
   return (
-    <div>LazyPageOne</div>
-  )
-}
+    <>
+      <h1 style={{color:'cornflowerblue'}} >
+        LazyPageOne
+      </h1>
+    </>
+  );
+};
+
+export default LazyPageOne;

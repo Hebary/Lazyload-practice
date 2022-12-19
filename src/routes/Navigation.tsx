@@ -1,41 +1,36 @@
+import { Suspense } from "react";
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import logo from "../assets/react.svg";
-
-import { 
-    LazyPageOne, 
-    LazyPageTwo, 
-    LazyPageThree 
-} from "../lazy/pages";
-
-
+import { Spinner } from "../lazy/components";
+import { LazyOne, LazyThree, LazyTwo } from "../routes/routes";
+import { routes } from "./routes";
 
 export const Navigation: React.FC = () => {
   return (
-    <BrowserRouter>
-      <div className="main-layout">
-        <nav>
-          <img src={logo} alt='react-logo' style={{marginTop:12}} />
-          <ul>
-            <li>
-              <Link to="/lazy-1">Lazy Load 1</Link>
-            </li>
-            <li>
-              <Link to="/lazy-2">Lazy Load 2</Link>
-            </li>
-            <li>
-              <Link to="/lazy-3">Lazy Load 3</Link>
-            </li>
-          </ul>
-        </nav>
+    <Suspense fallback={<Spinner/>}>
+      <BrowserRouter>
+        <div className="main-layout">
+          <nav>
+            <img src={logo} alt="react-logo" style={{ marginTop: 12 }} />
+            <ul>
+              {routes.map(({ to, name }) => {
+                return (
+                  <li key={to}>
+                    <Link to={to}>{name}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-        <Routes>
-            <Route path="/lazy-1" element ={ <LazyPageOne/> }/>
-            <Route path="/lazy-2" element={ <LazyPageTwo/> } />
-            <Route path="/lazy-3" element={ <LazyPageThree/> }/>
-            <Route path="/*" element={ <Navigate to="home" replace/> }/>
-        </Routes>
-
-      </div>
-    </BrowserRouter>
+          <Routes>
+             <Route path={routes[0].path} element ={ <LazyOne/> }/>
+            <Route path={routes[1].path} element={ <LazyTwo /> } />
+            <Route path={routes[2].path} element={ <LazyThree/> }/>
+            <Route path="/*" element={<Navigate to="lazy-1" replace />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </Suspense>
   );
 };

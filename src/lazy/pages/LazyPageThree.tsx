@@ -1,8 +1,8 @@
 
-type Props = {}
-
-export const LazyPageThree : React.FC<Props> = (props: Props) => {
+export const LazyPageThree = () => {
   return (
     <div>LazyPageThree</div>
   )
 }
+
+export default LazyPageThree

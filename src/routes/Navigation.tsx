@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link, Navigate, NavLink } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import logo from "../02-component-patterns/assets/react.svg";
 import { ShoppingPage } from "../02-component-patterns/pages";
 

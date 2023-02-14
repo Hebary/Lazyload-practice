@@ -20,5 +20,9 @@
     border: 1px solid white;
 }
 
-
+.shopping-cart {
+    position: fixed;
+    right: 0;
+    top: 0;
+}
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import {
   ProductTitle,
   ProductImage,
@@ -32,7 +32,7 @@ export const ShoppingPage = () => {
     // '1':  { ...products[0], count: 9 },
   });
 
-  const onProductCountChange = (product: Product, count: number) => {
+  const onProductCountChange = () => {
     console.log('onProductCountChange')
   }
 
@@ -43,7 +43,11 @@ export const ShoppingPage = () => {
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         {products.map((product) => (
 
-          <ProductCard product={product} className="bg-dark">
+          <ProductCard 
+              product={product} 
+              className="bg-dark"
+              onChange={onProductCountChange} 
+            >
             <ProductImage 
               className="custom-img" 
               style={{ boxShadow:' 10px 10px 10px rgba(0,0,0, .2)' }} />
@@ -56,7 +60,11 @@ export const ShoppingPage = () => {
         
       </div>
       <div className='shopping-cart'>
-        <ProductCard product={products[1]}style={{width:'100px'}} className="bg-dark">
+        <ProductCard 
+            className="bg-dark"
+            product={products[1]}
+            style={{width:'100px'}}
+            >
           <ProductImage 
             className="custom-img" 
             style={{ boxShadow:' 10px 10px 10px rgba(0,0,0, .2)' }} />

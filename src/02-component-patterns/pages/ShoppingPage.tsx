@@ -10,12 +10,12 @@ import "../styles/custom-styles.css";
 
 const products: Product[] = [
   {
-    id: "0001",
+    id: "1",
     title: "Coffee Mug",
     img: "./coffee-mug.png",
   },
   {
-    id: "0002",
+    id: "2",
     title: "Coffee Mug Meme",
     img: "./coffee-mug2.png",
   }
@@ -30,8 +30,8 @@ export const ShoppingPage = () => {
   const [shoppingCart, setShoppingCart] = useState<{ [key: string]: ProductInCart }>({
     // '1':  { ...products[0], count: 9 },
   });
-
-  const onProductCountChange = ({ count, product }:{ count:number, product: Product } ) => {
+  console.log(shoppingCart)
+  const onProductCountChange = ({ count, product }: { count:number, product: Product } ) => {
     
     setShoppingCart(( prevShoppingCart ) => {
 
@@ -51,14 +51,16 @@ export const ShoppingPage = () => {
 
   return (
     <div>
-      <h1 style={{ marginBottom: 25 }}>Shopping Store</h1>
+      <h1 style={{ marginBottom: 25 }}> Shopping Store </h1>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         {products.map((product) => (
+          
           <ProductCard 
               key={product.id}
               product={product} 
               className="bg-dark"
               onChange = { onProductCountChange } 
+              value={ shoppingCart[product.id]?.count || 0 }
             >
             <ProductImage 
               className="custom-img" 
@@ -80,6 +82,7 @@ export const ShoppingPage = () => {
             product={ product }
             style={{ width:'100px' }}
             value = { product.count }
+            onChange={ onProductCountChange }
           >
             <ProductImage 
               className="custom-img" 

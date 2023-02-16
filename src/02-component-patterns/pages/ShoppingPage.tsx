@@ -51,11 +51,10 @@ export const ShoppingPage = () => {
 
   return (
     <div>
-      <h1 style={{marginBottom:25}}>Shopping Store</h1>
+      <h1 style={{ marginBottom: 25 }}>Shopping Store</h1>
 
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         {products.map((product) => (
-
           <ProductCard 
               key={product.id}
               product={product} 
@@ -68,12 +67,12 @@ export const ShoppingPage = () => {
             <ProductTitle className="text-white font-bold" />
             <ProductButtons className="custom-buttons text-white font-bold" />
           </ProductCard>
-
-))}
+          ))
+        }
         
       </div>
       <div className='shopping-cart'>
-          {
+        {
           // Object.values(shoppingCart).map( (product) => (
           Object.entries(shoppingCart).map( ( [key, product]) => (
           <ProductCard
@@ -87,17 +86,9 @@ export const ShoppingPage = () => {
               style={{ boxShadow:' 10px 10px 10px rgba(0, 0, 0, .2)' }} />
             <ProductButtons className="custom-buttons text-white font-bold" />
           </ProductCard>
-          ))
+            ))
         }
       </div>
-
-      <div>
-          <code>
-            {JSON.stringify(shoppingCart, null, 2)}
-          </code>
-      </div>
-
-
     </div>
   );
 };

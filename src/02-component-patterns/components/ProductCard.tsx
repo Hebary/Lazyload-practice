@@ -16,13 +16,13 @@ export interface Props {
 export const ProductCard : FC<Props> = ( { product, children, className, style, onChange }) => {
   
   const { Provider } = ProductContext;
-  const { counter, increaseBy } = useProducts({onChange, product});
+  const { counter, increaseBy } = useProducts({ onChange, product });
 
   return (
     <Provider value={{ counter, increaseBy, product }}>
       <div 
         className={`${styles.productCard} ${className}`}
-        style={style}
+        style = { style }
       >
         {children}
       </div>

@@ -30,25 +30,34 @@ export const ShoppingPage = () => {
   const [shoppingCart, setShoppingCart] = useState<{ [key: string]: ProductInCart }>({
     // '1':  { ...products[0], count: 9 },
   });
-  console.log(shoppingCart)
+
   const onProductCountChange = ({ count, product }: { count:number, product: Product } ) => {
-    
+
     setShoppingCart(( prevShoppingCart ) => {
 
-      if(count === 0) {
-
-        const { [product.id]: itemToDelete, ...rest } = prevShoppingCart;  
-        // console.log({itemToDelete})
-        return rest;
+    const productInCart: ProductInCart = prevShoppingCart[product.id] || { ...product, count: 0 };  
+      if(Math.max( productInCart.count + count, 0) > 0) {
+        productInCart.count += count;  
+        return {
+          ...prevShoppingCart,
+          [product.id]: productInCart
+        }
       }
+      //si count es 0 ó menor a 0 borra el producto
+      const { [product.id]: itemToDelete, ...rest } = prevShoppingCart;  
 
-      return {
-        ...prevShoppingCart,
-        [product.id] : { ...product, count }
-    }
-  });
-}
+      return {...rest};
+    });
+  }
+    //   if(count === 0) {
 
+        // console.log({itemToDelete})
+
+
+    //   return {
+    //     ...prevShoppingCart,
+    //     [product.id] : { ...product, count }
+    // }
   return (
     <div>
       <h1 style={{ marginBottom: 25 }}> Shopping Store </h1>

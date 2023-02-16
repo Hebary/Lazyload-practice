@@ -33,9 +33,9 @@ export const ShoppingPage = () => {
 
   const onProductCountChange = ({ count, product }:{ count:number, product: Product } ) => {
     
-    setShoppingCart((prevShoppingCart) => {
+    setShoppingCart(( prevShoppingCart ) => {
 
-      if(count<=0) {
+      if(count === 0) {
 
         const { [product.id]: itemToDelete, ...rest } = prevShoppingCart;  
         // console.log({itemToDelete})
@@ -52,7 +52,6 @@ export const ShoppingPage = () => {
   return (
     <div>
       <h1 style={{ marginBottom: 25 }}>Shopping Store</h1>
-
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         {products.map((product) => (
           <ProductCard 
@@ -74,19 +73,20 @@ export const ShoppingPage = () => {
       <div className='shopping-cart'>
         {
           // Object.values(shoppingCart).map( (product) => (
-          Object.entries(shoppingCart).map( ( [key, product]) => (
+          Object.entries( shoppingCart ).map( ( [key, product] ) => (
           <ProductCard
             key={key}
             className="bg-dark"
             product={ product }
             style={{ width:'100px' }}
+            value = { product.count }
           >
             <ProductImage 
               className="custom-img" 
               style={{ boxShadow:' 10px 10px 10px rgba(0, 0, 0, .2)' }} />
             <ProductButtons className="custom-buttons text-white font-bold" />
           </ProductCard>
-            ))
+          ))
         }
       </div>
     </div>

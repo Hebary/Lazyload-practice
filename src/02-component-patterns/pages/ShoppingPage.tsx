@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import {
   ProductTitle,
   ProductImage,
@@ -9,7 +9,6 @@ import { Product } from '../interfaces/index';
 import "../styles/custom-styles.css";
 
 const products: Product[] = [
-
   {
     id: "0001",
     title: "Coffee Mug",
@@ -32,9 +31,23 @@ export const ShoppingPage = () => {
     // '1':  { ...products[0], count: 9 },
   });
 
-  const onProductCountChange = ({count, product}:{count:number, product: Product}) => {
+  const onProductCountChange = ({ count, product }:{ count:number, product: Product } ) => {
     
-  }
+    setShoppingCart((prevShoppingCart) => {
+
+      if(count<=0) {
+
+        const { [product.id]: itemToDelete, ...rest } = prevShoppingCart;  
+        // console.log({itemToDelete})
+        return rest;
+      }
+
+      return {
+        ...prevShoppingCart,
+        [product.id] : { ...product, count }
+    }
+  });
+}
 
   return (
     <div>
@@ -57,21 +70,34 @@ export const ShoppingPage = () => {
           </ProductCard>
 
 ))}
-
         
       </div>
       <div className='shopping-cart'>
-        <ProductCard 
+          {
+          // Object.values(shoppingCart).map( (product) => (
+          Object.entries(shoppingCart).map( ( [key, product]) => (
+          <ProductCard
+            key={key}
             className="bg-dark"
-            product={products[1]}
-            style={{width:'100px'}}
-            >
-          <ProductImage 
-            className="custom-img" 
-            style={{ boxShadow:' 10px 10px 10px rgba(0,0,0, .2)' }} />
-         <ProductButtons className="custom-buttons text-white font-bold" />
-        </ProductCard>
+            product={ product }
+            style={{ width:'100px' }}
+          >
+            <ProductImage 
+              className="custom-img" 
+              style={{ boxShadow:' 10px 10px 10px rgba(0, 0, 0, .2)' }} />
+            <ProductButtons className="custom-buttons text-white font-bold" />
+          </ProductCard>
+          ))
+        }
       </div>
+
+      <div>
+          <code>
+            {JSON.stringify(shoppingCart, null, 2)}
+          </code>
+      </div>
+
+
     </div>
   );
 };

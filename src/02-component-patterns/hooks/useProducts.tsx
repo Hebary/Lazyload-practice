@@ -37,12 +37,18 @@ export const useProducts = ({ onChange, product, value = 0, initialValues }: use
       isMounted.current = false;
     }, [])
 
+    const reset = () => {
+        setCount(initialValues?.count || value);
+    }
     
 
     return {
         count,
-        increaseBy,
+        isMaxCountReached: !!initialValues?.maxCount && initialValues?.maxCount === count,
+        maxCount: initialValues?.maxCount,
         value,
-        maxCount: initialValues?.maxCount
+        
+        increaseBy,
+        reset
     }
 }
